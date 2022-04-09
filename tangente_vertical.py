@@ -2,15 +2,17 @@ import numpy as np
 import math
 
 def processa(lista):
-    dicionario = {}
+    lista2 = []
 
-    for i in range(0,len(lista)):
-
-        if round(lista[i],3) not in dicionario.keys() and round(lista[i],3)+0.01 not in dicionario.keys() and round(lista[i],3)-0.01 not in dicionario.keys() :
-            dicionario[round(lista[i],2)] = lista[i]
-
-
-    return dicionario
+    for i in lista:
+        dif = True
+        for u in lista2:
+            if abs(i-u)/(i) < 0.01:
+                dif = False
+                break
+        if dif:
+            lista2.append(i)
+    return lista2
 
 
 range_t = np.arange(0,math.pi*6,0.0001)
@@ -34,7 +36,11 @@ for t in range_t:
 
 
 
-print(len(processa(tangente_horizontal)))
 tan_v = processa(tangente_vertical)
+tan_h = processa(tangente_horizontal)
 
-print(len(tan_v))
+tan_v = tan_v[3:]
+
+
+print(tan_h)
+print(tan_v)
